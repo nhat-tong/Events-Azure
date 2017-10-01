@@ -1,0 +1,15 @@
+﻿@if (@ViewBag.CurrentUser != null)
+{
+    var user = HttpContext.Current.User.Identity.Name;
+    <div id="user-details-box" class="shadow">
+        <div class="details">
+            <img src="@ViewBag.CurrentUser.ImageUrl" alt="user picture" height="75" width="75" />
+            <ul>
+                <li><b>Name:</b> @ViewBag.CurrentUser.FullName </li>
+                <li><b>Title:</b> @ViewBag.CurrentUser.Position</li>
+                <li><b>Location:</b> @ViewBag.CurrentUser.Location</li>
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+}

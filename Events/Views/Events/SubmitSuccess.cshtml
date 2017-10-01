@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Event Successfully Created";
+}
+
+<h1 class="no-padding">Success!</h1>
+<hr />
+@Html.Partial("_UserDetailsView")
+<p>
+    Your event was successfully created.
+</p>
+<p>
+    Promote your event with the following registration link: <a class="blue-link" href="@ViewBag.EventRegistrationLink">@ViewBag.EventRegistrationLink</a>
+</p>

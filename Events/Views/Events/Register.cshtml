@@ -1,0 +1,42 @@
+﻿@model Events.Models.EventViewModel
+@{
+    ViewBag.Title = "Registration Confirmation";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        eventsManager.initializeEventRegister();
+    });
+</script>
+<div class="breadcrumbs">
+    <a href="@Url.Action("Index","Home")">Upcoming Events</a>
+    <span>/</span>
+    @Model.Title
+</div>
+@Html.Partial("_UserDetailsView")
+@using (Html.BeginForm("RegisterSuccess", "Events", FormMethod.Post))
+{
+    <div class="register-box">
+        <div class="splash shadow">
+            <input type="hidden" name="EventId" id="EventId" value="@Model.Id" />
+            <h1><strong>@Model.Title</strong></h1>
+            <p><strong>Description: </strong>@Model.Description</p>
+            <p><strong>Location: </strong> @Model.Location</p>
+            <p><strong>Audience: </strong> @Model.AudiencePluralName</p>
+            <p><strong>Start Date: </strong> @Model.StartDate.Value.ToString("MMM dd, yyyy")</p>
+            <p><strong>Duration: </strong> @Model.Duration</p>
+        </div>
+        <h1 class="no-padding">Register</h1>
+        <p style="padding-left:3px;">
+            <strong>Attendee Name: </strong>
+            <input type="hidden" id="AttendeeId" name="AttendeeId" value="@Model.OwnerId" />
+            <span id="Attendee">@Model.Owner</span>
+            <span class="pipe"> | </span>
+            <span class="browse">
+                <a href="javascript:void(0)" class="browse-users blue-link browseUsersClick">Browse Users</a>
+            </span>
+        </p>
+        <input type="submit" id="confirmButton" value="Register" class="button button-blue" />
+        <div class="clear"></div>
+    </div>
+}
+@Html.Partial("_UserSelectDialog")

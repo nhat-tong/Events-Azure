@@ -1,0 +1,33 @@
+﻿@{
+    
+    
+   // var users = ViewBag.Users as System.Collections.Generic.List<Events.Web.Model.ActiveDirectoryUser>;
+}
+<div id="dialog" style="display:none;">
+    <table class="userList">
+        <tr>
+            <th></th>
+            <th>Full Name</th>
+            <th>Title</th>
+            <th>Location</th>
+        </tr>
+        @foreach (var item in (List<Events.Models.ActiveDirectoryUser>) ViewBag.Users)
+        {
+            <tr class="userDetails">
+                <td class="imgCell">
+                    <span class="userId">@item.ActiveDirectoryId</span>
+                    <img src="@item.ImageUrl" alt="user picture" height="45" width="45" />
+                </td>
+                <td>
+                    <span>@item.FullName</span>
+                </td>
+                <td>
+                    <span>@item.Position</span>
+                </td>
+                <td>
+                    <span>@item.Location</span>
+                </td>
+            </tr>
+        }
+    </table>
+</div>

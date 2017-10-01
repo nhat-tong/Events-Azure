@@ -1,0 +1,45 @@
+﻿@model Events.Models.HomeViewModel
+@{
+    ViewBag.Title = "Upcoming Events";
+}
+
+<h1 class="upcoming-events">Upcoming Events</h1>
+<hr />
+@Html.Partial("_UserDetailsView")
+
+@if (Model.UpcomingEvents != null && Model.UpcomingEvents.Any())
+{
+    <table class="shadow">
+        <tr>
+            <th>Event Title</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+        </tr>
+        @foreach (var eventItem in Model.UpcomingEvents)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Register", "Events", new { id=@eventItem.Id })">@eventItem.Title</a>
+                </td>
+                <td>
+                    <span>@eventItem.Location</span>
+                </td>
+                <td>
+                    <span>@eventItem.StartDate.Value.ToString("MMM dd, yyyy")</span>
+                </td>
+                <td>
+                    <span>@eventItem.Duration</span>
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+
+<hr />
+<div style="margin-top:25px;font-size:.9em;">
+    <p class="no-padding">
+        <b>Machine Name:</b> @Environment.MachineName<br />
+    </p>
+</div>

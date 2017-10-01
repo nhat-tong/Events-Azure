@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "My Events";
+}
+@model List<Events.Models.EventViewModel>
+<h1 class="my-events">My Events</h1>
+<hr />
+@Html.Partial("_UserDetailsView")
+@if (Model != null && Model.Any())
+{
+    <table class="shadow">
+        <tr>
+            <th>Event Title</th>
+            <th>Location</th>
+            <th>Start Date</th>
+            <th>Duration</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><span>@item.Title</span></td>
+                <td><span>@item.Location</span></td>
+                <td><span>@item.StartDate.Value.ToString("MMM dd, yyyy")</span></td>
+                <td><span>@item.Duration</span></td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <p>Buu!... you have not registered to any event.</p>
+    <p>See the list of <a href="/" class="blue-link">upcoming events</a> and register now!</p>
+}

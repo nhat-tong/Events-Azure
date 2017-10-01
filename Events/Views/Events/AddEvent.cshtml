@@ -1,0 +1,80 @@
+﻿@model Events.Models.EventViewModel
+@{
+    ViewBag.Title = "Add Event";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        eventsManager.initializeEventAdd();
+    });
+</script>
+<h1 class="addevent">Create a new event</h1>
+<hr />
+@Html.Partial("_UserDetailsView")
+@using (Html.BeginForm("AddEvent", "Events", FormMethod.Post))
+{
+
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add Your Event Details</legend>
+        <p style="padding-left:3px;">
+            <strong>Owner: </strong>
+            <input type="hidden" name="OwnerId" id="OwnerId" value="@Model.OwnerId" />
+            <span id="Owner">@Model.Owner</span>
+            <span class="pipe"> | </span>
+            <span class="browse">
+                <a href="javascript:void(0)" class="browse-users blue-link browseUsersClick">Browse Users</a>
+            </span>
+        </p>
+        <dl>
+            <dt>
+                <label>Event Title:</label>
+            </dt>
+            <dd>
+                @Html.TextBoxFor(x => x.Title)
+                @Html.ValidationMessageFor(x => x.Title)
+            </dd>
+            <dt>
+                <label>Event Description:</label>
+            </dt>
+            <dd>
+                @Html.TextBoxFor(x => x.Description)
+                @Html.ValidationMessageFor(x => x.Description)
+            </dd>
+            <dt>
+                <label>Location:</label>
+            </dt>
+            <dd>
+                @Html.TextBoxFor(x => x.Location)
+                @Html.ValidationMessageFor(x => x.Location)
+            </dd>
+            <dt>
+                <label class="audience">Audience:</label>
+                <label class="datepicker">Start Date:</label>
+                <label class="duration">Days:</label>
+            </dt>
+            <dd>
+                <select id="Audience" name="Audience">
+                    <option value="0">ITs</option>
+                    <option value="1">Developers</option>
+                    <option value="2">Marketing People</option>
+                    <option value="3">Salespeople</option>
+                </select>
+                @Html.TextBoxFor(x => x.StartDate, new { @class = "datepicker", value = "" })
+                @if (ViewBag.DateRangeError != null && ViewBag.DateRangeError)
+                { 
+                     <span style="float:left">   @Html.ValidationMessageFor(x => x.StartDate)</span>
+                }
+                else
+                {
+                    @Html.ValidationMessageFor(x => x.StartDate)
+                }
+                @Html.TextBoxFor(x => x.Days, new { @class = "duration" })
+                @Html.ValidationMessageFor(x => x.Days)
+                <div id="error-message-box">
+                </div>
+            </dd>
+        </dl>
+        <input type="submit" id="save" class="button button-black" value="Save and Publish" />
+    </fieldset>
+    @Html.Partial("_UserSelectDialog")
+}
